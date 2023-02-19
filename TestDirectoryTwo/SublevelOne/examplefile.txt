@@ -1,0 +1,4 @@
+## Linux
+
+### run as root 
+`sudo -i`

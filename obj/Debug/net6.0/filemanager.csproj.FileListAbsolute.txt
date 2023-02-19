@@ -1,0 +1,27 @@
+/home/gareth/projects/filemanager/bin/Debug/net6.0/appsettings.Development.json
+/home/gareth/projects/filemanager/bin/Debug/net6.0/appsettings.json
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager.staticwebassets.runtime.json
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager.deps.json
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager.runtimeconfig.json
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager.dll
+/home/gareth/projects/filemanager/bin/Debug/net6.0/ref/filemanager.dll
+/home/gareth/projects/filemanager/bin/Debug/net6.0/filemanager.pdb
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.csproj.AssemblyReference.cache
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.GeneratedMSBuildEditorConfig.editorconfig
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.AssemblyInfoInputs.cache
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.AssemblyInfo.cs
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.csproj.CoreCompileInputs.cache
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.MvcApplicationPartsAssemblyInfo.cache
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.RazorAssemblyInfo.cache
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.RazorAssemblyInfo.cs
+/home/gareth/projects/filemanager/obj/Debug/net6.0/staticwebassets.build.json
+/home/gareth/projects/filemanager/obj/Debug/net6.0/staticwebassets.development.json
+/home/gareth/projects/filemanager/obj/Debug/net6.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
+/home/gareth/projects/filemanager/obj/Debug/net6.0/scopedcss/bundle/filemanager.styles.css
+/home/gareth/projects/filemanager/obj/Debug/net6.0/scopedcss/projectbundle/filemanager.bundle.scp.css
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.dll
+/home/gareth/projects/filemanager/obj/Debug/net6.0/ref/filemanager.dll
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.pdb
+/home/gareth/projects/filemanager/obj/Debug/net6.0/filemanager.genruntimeconfig.cache
+/home/gareth/projects/filemanager/bin/Debug/net6.0/Postman/Filemanager Example API Requests.postman_collection.json

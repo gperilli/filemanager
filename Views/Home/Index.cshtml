@@ -3,6 +3,169 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">File Manager</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="file-manager-section">
+  <span>Base URL: <span id="base-url"></span></span>
+</div>
+
+<div class="file-manager-section">
+  <label style="margin-right: 10px;">Set the base server side directory: </label><input type="text" id="base-directory" value="TestDirectoryOne" /><button onclick="updateBaseDirectory()">set / refresh</button>
+</div>
+
+<div class="file-manager-section">
+    <form method="post" enctype="multipart/form-data"
+          action="/Upload?address=address" onsubmit="makeUploadRequest(this);return false;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Upload a file:</label>
+                <input type="file" id="uploadfile" name="file" single />
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="file-manager-section">
+  <span>Directories: <span id="directories-count"></span>, Files: <span id="files-count"></span></span>
+  <div id="filemanager-container" style="overflow: auto; word-wrap: break-word;">
+    <!-- Files and Directories Inserted Here -->
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+
+<script>
+
+  const baseURL = "https://localhost:7039";
+  let baseDirectory = 'TestDirectoryOne';
+  const fileManagerIcons = adjustedFontAwesomeIcons;
+  let addressRequest, uploadRequest;
+  let addressQuery;
+  
+  window.addEventListener( 'load', setFileManagerAddress() );
+
+  // Upload handling
+  function getUploadResponse() {
+    if (uploadRequest.readyState === XMLHttpRequest.DONE) {
+      
+      if (uploadRequest.status === 200) {
+        setFileManagerAddress();
+      } else {
+        alert("There was a problem with the request.");
+      }
+    }
+  }
+
+  function makeUploadRequest(oFormElement) {
+    uploadRequest = new XMLHttpRequest();
+
+    if (!uploadRequest) {
+      alert("Giving up :( Cannot create an XMLHTTP instance");
+      return false;
+    }
+    
+    uploadRequest.onreadystatechange = getUploadResponse;
+    uploadRequest.open("post", `/Upload?address=${addressQuery}`);
+    uploadRequest.send(new FormData(oFormElement));
+  }
+
+
+  // Address Setting
+  function setAddressContents(addressRequest) {
+    let parsedData = JSON.parse(addressRequest.responseText);
+
+    let directoryCount = 0;
+      let fileCount = 0;
+    for (let i = 0; i < parsedData.length; i++) {
+
+      let navIcon = parsedData[i].substring(0, 2) == "//" ? fileManagerIcons["directoryIcon"] : "" ;
+      let downloadIcon = parsedData[i].substring(0, 2) == "//" ? "" : fileManagerIcons["downloadIcon"] ;
+
+      let addressItemLink;
+      if (parsedData[i].substring(0, 2) == "//") {
+        addressItemLink = `${baseURL}/?address=${parsedData[i].replace('//', '')}`;
+        directoryCount++;
+      } else {
+        addressItemLink = `Download?link=${parsedData[i].split(",")[0]}`;
+        fileCount += 1;
+      }
+
+      let addressItem = `
+        <div style="display: flex; flex-direction: row; align-items: center; margin-left: 20px;">
+            ${navIcon}
+            <a style="margin-top: 5px;" href="${addressItemLink}">
+              <span>${parsedData[i].replace('//', '').replace(`${addressQuery}/`, '')}</span>
+            </a>
+            ${downloadIcon}
+        </div>  
+      `
+
+      document.querySelector("#filemanager-container").insertAdjacentHTML("beforeend", `${addressItem}`);
+    }
+    document.querySelector("#files-count").innerHTML = fileCount;
+    document.querySelector("#directories-count").innerHTML = directoryCount;
+  } 
+  
+  function getAddressResponse() {
+    if (addressRequest.readyState === XMLHttpRequest.DONE) {
+      if (addressRequest.status === 200) {
+        setAddressContents(addressRequest);
+      } else {
+        alert("There was a problem with the request.");
+      }
+    }
+  }
+
+  function makeAddressRequest() {
+    addressRequest = new XMLHttpRequest();
+    if (!addressRequest) {
+      alert("Giving up :( Cannot create an XMLHTTP instance");
+      return false;
+    }
+    addressRequest.onreadystatechange = getAddressResponse;
+    addressRequest.open("GET", `FileManager?address=${addressQuery}` );
+    addressRequest.send();
+  }
+
+  function setFileManagerAddress() {
+    document.querySelector("#base-url").innerHTML = baseURL;
+    if (localStorage.getItem('fileManagerBaseDirectory') == null) {
+      localStorage.setItem('fileManagerBaseDirectory', baseDirectory);
+    } else {
+      baseDirectory = localStorage.getItem('fileManagerBaseDirectory');
+      document.querySelector("#base-directory").value = baseDirectory;
+    }
+
+    let params = (new URL(document.location)).searchParams;
+    addressQuery = (new URL(document.location)).searchParams.get("address") == null ? baseDirectory : params.get("address");
+    
+    document.querySelector("#filemanager-container").innerHTML = '';
+
+    const para = `
+      <div style="display: flex; flex-direction: row; align-items: center;">
+        ${fileManagerIcons["openDirectoryIcon"]}
+        <span style="margin-top: 5px;">${addressQuery}</span>
+      </div>
+    `
+    document.querySelector("#filemanager-container").insertAdjacentHTML("beforeend", para);
+
+    makeAddressRequest();
+  }
+
+  // Set and Update Base Directory
+  function updateBaseDirectory() {
+    newBaseDirectory = document.querySelector("#base-directory").value;
+    localStorage.setItem('fileManagerBaseDirectory', newBaseDirectory);
+    window.location.href = `${baseURL}/?address=${newBaseDirectory}`
+  }
+
+  document.querySelector("#base-directory").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+          updateBaseDirectory()
+      }
+  });
+
+</script>

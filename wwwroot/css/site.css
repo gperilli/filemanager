@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.file-manager-section {
+  border-left: 3px solid blue; 
+  margin-bottom: 10px;
+  padding-left: 10px;
+}

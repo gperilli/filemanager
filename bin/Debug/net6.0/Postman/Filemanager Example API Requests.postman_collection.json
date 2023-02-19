@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "615656bf-cad8-4f3b-bf90-195593c9d237",
+		"name": "Filemanager Example API Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19552751"
+	},
+	"item": [
+		{
+			"name": "FileManager",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"tlsPreferServerCiphers": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:7039/?address=TestDirectoryOne/SublevelOne",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7039",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "TestDirectoryOne/SublevelOne"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7039/Download?link=TestDirectoryTwo/SublevelOne/picture.jpg",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7039",
+					"path": [
+						"Download"
+					],
+					"query": [
+						{
+							"key": "link",
+							"value": "TestDirectoryTwo/SublevelOne/picture.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:7039/Upload?address=TestDirectoryOne/SublevelOne",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7039",
+					"path": [
+						"Upload"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "TestDirectoryOne/SublevelOne"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
