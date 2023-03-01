@@ -8,9 +8,21 @@
 	"item": [
 		{
 			"name": "FileManager",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
-				"tlsPreferServerCiphers": false
+				"tlsPreferServerCiphers": false,
+				"strictSSL": false
 			},
 			"request": {
 				"method": "GET",
@@ -18,7 +30,8 @@
 					{
 						"key": "Content-Type",
 						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -26,19 +39,24 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:7039/?address=TestDirectoryOne/SublevelOne",
+					"raw": "https://localhost:7039/Filemanager?address=TestDirectoryOne/SublevelOne",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "7039",
 					"path": [
-						""
+						"Filemanager"
 					],
 					"query": [
 						{
 							"key": "address",
 							"value": "TestDirectoryOne/SublevelOne"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
 						}
 					]
 				}
